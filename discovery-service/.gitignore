@@ -1,4 +1,15 @@
 /target/
-/.settings/
-/.classpath
-/.project
+
+### STS ###
+.classpath
+.project
+.settings
+.springBeans
+.sts4-cache
+.vscode
+
+### IntelliJ IDEA ###
+.idea
+*.iws
+*.iml
+*.ipr

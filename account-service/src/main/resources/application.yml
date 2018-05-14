@@ -2,6 +2,7 @@ server:
   port: ${PORT:2222}
 
 spring:  
+  profiles: container
   application:
     name: account-service
   logging:
@@ -14,7 +15,7 @@ spring:
 eureka:  
   client:
     serviceUrl:
-      defaultZone: ${DISCOVERY_URL:http://localhost:8761}/eureka/
+      defaultZone: ${DISCOVERY_URL:http://discovery-service:8761}/eureka/
   instance:
     leaseRenewalIntervalInSeconds: 1
     leaseExpirationDurationInSeconds: 2
@@ -22,3 +23,9 @@ eureka:
 ribbon:
   eureka:
     enabled: true
+
+swagger:
+  publish:
+    publish-url: http://microservice-mgr:8080/api/publish
+    swagger-url: http://localhost:${server.port}/v2/api-docs
+    security-token: 9a019713-XXXX-XXXX-XXXX-74090a0ea9f7

@@ -1,4 +1,5 @@
 spring:  
+  profiles: container
   application:
     name: customer-service
   logging:
