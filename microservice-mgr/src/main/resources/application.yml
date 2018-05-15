@@ -3,6 +3,6 @@ spring:
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
     type: com.alibaba.druid.pool.DruidDataSource
-    url: jdbc:mysql://mgr-db:3306/swagger?useSSL=false&allowPublicKeyRetrieval=true
+    url: jdbc:mysql://MGR-DB:3306/swagger?useSSL=false&allowPublicKeyRetrieval=true
     username: root
     password: 123456

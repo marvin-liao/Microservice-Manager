@@ -15,6 +15,6 @@ ribbon:
 
 swagger:
   publish:
-    publish-url: http://microservice-mgr:8080/api/publish
+    publish-url: http://MICRO-MGR:8080/api/publish
     swagger-url: http://localhost:${server.port}/v2/api-docs
     security-token: 9a019713-XXXX-XXXX-XXXX-74090a0ea9f7

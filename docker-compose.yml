@@ -19,44 +19,45 @@ services:
     ports:
       - 3307:3306
 
-#  adminer:
-#    container_name: adminer
-#    image: adminer
-#    ports:
-#      - 9000:8080
-
-  # discovery-service:
-  #   container_name: DISCOVERY
-  #   image: java:8-jre
-  #   volumes:
-  #     - ./discovery-service/target:/app
-  #   command: java -Djava.security.egd=file:/dev/./urandom -Dspring.profiles.active=container -jar /app/discovery-service.jar
+  # adminer:
+  #   container_name: ADMIN
+  #   container_name: adminer
+  #   image: adminer
   #   ports:
-  #     - 8761:8761
+  #     - 9000:8080
+
+  discovery-service:
+    container_name: DISCOVERY
+    image: java:8-jre
+    volumes:
+      - ./discovery-service/target:/app
+    command: java -Djava.security.egd=file:/dev/./urandom -Dspring.profiles.active=container -jar /app/discovery-service.jar
+    ports:
+      - 8761:8761
   
-  # account-service:
-  #   container_name: ACCOUNT
-  #   image: java:8-jre
-  #   volumes:
-  #     - ./account-service/target:/app
-  #   command: java -Djava.security.egd=file:/dev/./urandom -Dspring.profiles.active=container -jar /app/account-service.jar
-  #   ports:
-  #     - 2222:2222
+  account-service:
+    container_name: ACCOUNT
+    image: java:8-jre
+    volumes:
+      - ./account-service/target:/app
+    command: java -Djava.security.egd=file:/dev/./urandom -Dspring.profiles.active=container -jar /app/account-service.jar
+    ports:
+      - 2222:2222
 
-  # customer-service:
-  #   container_name: CUSTOMER
-  #   image: java:8-jre
-  #   volumes:
-  #     - ./customer-service/target:/app
-  #   command: java -Djava.security.egd=file:/dev/./urandom -Dspring.profiles.active=container -jar /app/customer-service.jar
-  #   ports:
-  #     - 3333:3333
+  customer-service:
+    container_name: CUSTOMER
+    image: java:8-jre
+    volumes:
+      - ./customer-service/target:/app
+    command: java -Djava.security.egd=file:/dev/./urandom -Dspring.profiles.active=container -jar /app/customer-service.jar
+    ports:
+      - 3333:3333
 
-  # gateway-service:
-  #   container_name: GATEWAY
-  #   image: java:8-jre
-  #   volumes:
-  #     - ./gateway-service/target:/app
-  #   command: java -Djava.security.egd=file:/dev/./urandom -Dspring.profiles.active=container -jar /app/gateway-service.jar
-  #   ports:
-  #     - 80:8765
+  gateway-service:
+    container_name: GATEWAY
+    image: java:8-jre
+    volumes:
+      - ./gateway-service/target:/app
+    command: java -Djava.security.egd=file:/dev/./urandom -Dspring.profiles.active=container -jar /app/gateway-service.jar
+    ports:
+      - 80:8765
