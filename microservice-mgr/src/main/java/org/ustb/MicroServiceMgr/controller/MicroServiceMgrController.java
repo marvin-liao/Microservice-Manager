@@ -62,7 +62,7 @@ public class MicroServiceMgrController {
 
             dao.save(doc);
 
-            LOG.info("APP[{}] swagger document is updated", infoNode.get("title"));
+            LOG.info("api doc update {}", doc.getDoc());
         }
         catch (IOException e) {
             LOG.error(e.getMessage());
@@ -81,10 +81,9 @@ public class MicroServiceMgrController {
     }
 
     @RequestMapping(path = "/machine/publish", method = RequestMethod.POST)
-    public void machinePublish(){
-
+    public void machinePublish(@RequestBody String json){
+        LOG.info("Machine Monitor {}", json);
     }
-
 
     @RequestMapping(path = "/login", method = RequestMethod.POST )
     public void login(String username, String password){

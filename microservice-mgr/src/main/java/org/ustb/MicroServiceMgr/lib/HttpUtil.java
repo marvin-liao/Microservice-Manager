@@ -29,24 +29,18 @@ import org.apache.http.util.EntityUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
   
-/** 
- * @author 马弦 
- * @date 2017年10月23日 下午2:49 
- * HttpClient工具类 
- */  
+
 public class HttpUtil {  
     
     private static final Logger LOG = LoggerFactory.getLogger(HttpUtil.class);
-  
-    /** 
-     * get请求 
-     * @return 
-     */  
+
     public static String doGet(String url) {  
         try {  
-            HttpClient client = new DefaultHttpClient();  
+            HttpClient client = HttpClients.createDefault();
             //发送get请求  
-            HttpGet request = new HttpGet(url);  
+            HttpGet request = new HttpGet(url);
+            request.setHeader("Accept", "application/json");
+            request.setHeader("Content-Type", "application/json");
             HttpResponse response = client.execute(request);  
    
             /**请求发送成功，并得到响应**/  
@@ -63,19 +57,13 @@ public class HttpUtil {
           
         return null;  
     }  
-      
-    /** 
-     * post请求(用于key-value格式的参数) 
-     * @param url 
-     * @param params 
-     * @return 
-     */  
+
     public static String doPost(String url, Map params){  
           
         BufferedReader in = null;    
         try {    
             // 定义HttpClient    
-            HttpClient client = new DefaultHttpClient();    
+            HttpClient client = HttpClients.createDefault();
             // 实例化HTTP方法    
             HttpPost request = new HttpPost();    
             request.setURI(new URI(url));  
@@ -118,13 +106,7 @@ public class HttpUtil {
             return null;  
         }  
     }  
-      
-    /** 
-     * post请求（用于请求json格式的参数） 
-     * @param url 
-     * @param params 
-     * @return 
-     */  
+
     public static String doPost(String url, String params) throws Exception {  
           
         CloseableHttpClient httpclient = HttpClients.createDefault();  

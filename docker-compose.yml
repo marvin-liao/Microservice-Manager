@@ -16,6 +16,7 @@ services:
       - MYSQL_ROOT_PASSWORD=123456
     volumes:
       - ./mgr-db:/docker-entrypoint-initdb.d
+      - ./machine-agent:/agent
     ports:
       - 3307:3306
 
@@ -31,6 +32,7 @@ services:
     image: java:8-jre
     volumes:
       - ./discovery-service/target:/app
+      - ./machine-agent:/agent
     command: java -Djava.security.egd=file:/dev/./urandom -Dspring.profiles.active=container -jar /app/discovery-service.jar
     ports:
       - 8761:8761
@@ -40,6 +42,7 @@ services:
     image: java:8-jre
     volumes:
       - ./account-service/target:/app
+      - ./machine-agent:/agent
     command: java -Djava.security.egd=file:/dev/./urandom -Dspring.profiles.active=container -jar /app/account-service.jar
     ports:
       - 2222:2222
@@ -49,6 +52,7 @@ services:
     image: java:8-jre
     volumes:
       - ./customer-service/target:/app
+      - ./machine-agent:/agent
     command: java -Djava.security.egd=file:/dev/./urandom -Dspring.profiles.active=container -jar /app/customer-service.jar
     ports:
       - 3333:3333
@@ -58,6 +62,7 @@ services:
     image: java:8-jre
     volumes:
       - ./gateway-service/target:/app
+      - ./machine-agent:/agent
     command: java -Djava.security.egd=file:/dev/./urandom -Dspring.profiles.active=container -jar /app/gateway-service.jar
     ports:
       - 80:8765

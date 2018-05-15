@@ -14,8 +14,7 @@
  Date: 09/05/2018 01:36:08
 */
 
-SET NAMES utf8mb4;
-SET FOREIGN_KEY_CHECKS = 0;
+SET NAMES utf8;
 
 CREATE DATABASE `swagger` CHARACTER SET utf8 COLLATE utf8_general_ci;
 USE swagger;
@@ -32,5 +31,3 @@ CREATE TABLE `appdoc` (
   PRIMARY KEY (`id`),
   UNIQUE KEY `title` (`title`)
 ) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8;
-
-SET FOREIGN_KEY_CHECKS = 1;
