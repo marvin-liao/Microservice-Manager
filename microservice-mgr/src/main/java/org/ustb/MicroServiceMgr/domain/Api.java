@@ -1,6 +1,6 @@
 package org.ustb.MicroServiceMgr.domain;
 
-public class Appdoc {
+public class Api {
     private int id;
     private String title;
     private String description;

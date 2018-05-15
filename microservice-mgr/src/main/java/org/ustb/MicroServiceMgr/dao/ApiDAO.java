@@ -7,21 +7,21 @@ import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 import org.ustb.MicroServiceMgr.controller.MicroServiceMgrController;
-import org.ustb.MicroServiceMgr.domain.Appdoc;
+import org.ustb.MicroServiceMgr.domain.Api;
 
 import java.util.List;
 
 @Repository
-public class AppdocDAO {
+public class ApiDAO {
 
-    private static final Logger LOG = LoggerFactory.getLogger(AppdocDAO.class);
+    private static final Logger LOG = LoggerFactory.getLogger(ApiDAO.class);
 
     @Autowired
     private JdbcTemplate jdbcTemplate;
 
-    public int save(Appdoc doc){
-        List<Appdoc> list = jdbcTemplate.query("SELECT * FROM appdoc WHERE title = ?",
-                new Object[]{doc.getTitle()}, new BeanPropertyRowMapper(Appdoc.class));
+    public int save(Api doc){
+        List<Api> list = jdbcTemplate.query("SELECT * FROM appdoc WHERE title = ?",
+                new Object[]{doc.getTitle()}, new BeanPropertyRowMapper(Api.class));
 
         if (list != null && list.size() > 0) {
             String sql = "UPDATE appdoc SET description=?, doc=? WHERE title=?";
@@ -34,16 +34,16 @@ public class AppdocDAO {
         }
     }
 
-    public List<Appdoc> findAll(){
+    public List<Api> findAll(){
         String sql = "SELECT * FROM appdoc";
         LOG.info("RUN sql[{}]", sql);
-        return jdbcTemplate.query(sql, new Object[]{}, new BeanPropertyRowMapper(Appdoc.class));
+        return jdbcTemplate.query(sql, new Object[]{}, new BeanPropertyRowMapper(Api.class));
     }
 
-    public Appdoc findByTitle(String title){
+    public Api findByTitle(String title){
         String sql = "SELECT * FROM appdoc WHERE title = ?";
         LOG.info("RUN sql[{}]", sql);
-        List<Appdoc> list = jdbcTemplate.query(sql, new Object[]{title}, new BeanPropertyRowMapper(Appdoc.class));
+        List<Api> list = jdbcTemplate.query(sql, new Object[]{title}, new BeanPropertyRowMapper(Api.class));
 
         if(list != null && list.size() > 0){
             return list.get(0);

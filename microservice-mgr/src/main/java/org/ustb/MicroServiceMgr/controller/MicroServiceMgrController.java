@@ -8,8 +8,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import org.ustb.MicroServiceMgr.dao.AppdocDAO;
-import org.ustb.MicroServiceMgr.domain.Appdoc;
+import org.ustb.MicroServiceMgr.dao.ApiDAO;
+import org.ustb.MicroServiceMgr.domain.Api;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -22,15 +22,15 @@ public class MicroServiceMgrController {
     private static final Logger LOG = LoggerFactory.getLogger(MicroServiceMgrController.class);
 
     @Autowired
-    private AppdocDAO dao;
+    private ApiDAO dao;
 
     @RequestMapping(path = "/list", method = RequestMethod.GET)
     public String list(){
-        List<Appdoc> list = dao.findAll();
+        List<Api> list = dao.findAll();
         List<String> result = new ArrayList<String>();
 
-        for(Appdoc doc : list){
-            result.add(doc.getDoc());
+        for(Api api : list){
+            result.add(api.getDoc());
         }
 
         return  "[" + String.join(",", result) + "]";
@@ -38,7 +38,7 @@ public class MicroServiceMgrController {
 
     @RequestMapping(path = "/doc/{title}", method = RequestMethod.GET)
     public String doc(@PathVariable("title") String title){
-        Appdoc doc = dao.findByTitle(title);
+        Api doc = dao.findByTitle(title);
 
         if (doc != null) {
             return doc.getDoc();
@@ -49,13 +49,13 @@ public class MicroServiceMgrController {
     }
 
     @RequestMapping(path = "/api/publish", method = RequestMethod.POST, consumes = "application/json;charset=utf-8" )
-    public void publish(@RequestBody String json){
+    public void apiPublish(@RequestBody String json){
         try {
             ObjectMapper m = new ObjectMapper();
             JsonNode rootNode = m.readTree(json);
             JsonNode infoNode = rootNode.get("info");
 
-            Appdoc doc = new Appdoc();
+            Api doc = new Api();
             doc.setTitle(infoNode.get("title").textValue());
             doc.setDescription(infoNode.get("description").textValue());
             doc.setDoc(json);
@@ -68,6 +68,23 @@ public class MicroServiceMgrController {
             LOG.error(e.getMessage());
         }
     }
+
+
+    @RequestMapping(path = "/service/list", method = RequestMethod.GET)
+    public String serviceList(){
+        return "";
+    }
+
+    @RequestMapping(path = "/machine/list", method = RequestMethod.GET)
+    public String machineList(){
+        return "";
+    }
+
+    @RequestMapping(path = "/machine/publish", method = RequestMethod.POST)
+    public void machinePublish(){
+
+    }
+
 
     @RequestMapping(path = "/login", method = RequestMethod.POST )
     public void login(String username, String password){
@@ -83,25 +100,4 @@ public class MicroServiceMgrController {
     public void modifyAuth(){
         //管理员变更用户的权限
     }
-
-    /*
-    @RequestMapping(path = "/publish", method = RequestMethod.POST, consumes = "application/json;charset=utf-8" )
-    public void publish(@RequestBody Swagger swagger){
-        //Swagger original = swaggerDocRepo.findByBasePath(swagger.getBasePath());
-
-        // MongoDB docs cannot contain "$" when update, so we must delete old one and save the new one.
-        //swaggerDocRepo.delete(original.getId());
-
-        System.out.println("123123");
-        swaggerDocRepo.save(swagger);
-
-        Iterator<Swagger> iter = swaggerDocRepo.  ().iterator();
-
-        while(iter.hasNext())
-        {
-            System.out.println("ID:" + iter.next().getId());
-        }
-
-    }
-    */
 }
