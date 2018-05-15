@@ -1,6 +1,7 @@
 /target/
 
 ### STS ###
+.DS_Store
 .classpath
 .project
 .settings
