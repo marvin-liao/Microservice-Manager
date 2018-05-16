@@ -52,7 +52,7 @@ services:
       - CONTAINER_NAME=CUSTOMER
       - APPLICATION_JAR=/app/customer-service.jar
     volumes:
-      - ./account-service/target:/app
+      - ./customer-service/target:/app
       - ./shell:/shell
     command: /shell/entrypoint.sh
     ports:

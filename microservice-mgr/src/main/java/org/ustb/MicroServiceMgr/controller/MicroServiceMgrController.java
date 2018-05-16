@@ -1,5 +1,6 @@
 package org.ustb.MicroServiceMgr.controller;
 
+import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.slf4j.Logger;
@@ -10,6 +11,7 @@ import org.springframework.web.bind.annotation.*;
 
 import org.ustb.MicroServiceMgr.dao.ApiDAO;
 import org.ustb.MicroServiceMgr.domain.Api;
+import org.ustb.MicroServiceMgr.domain.Machine;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -84,13 +86,13 @@ public class MicroServiceMgrController {
     public void machinePublish(@RequestBody String json){
         try {
             ObjectMapper m = new ObjectMapper();
-            JsonNode rootNode = m.readTree(json);
+            m.disable(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES);
+            Machine machine = m.readValue(json, Machine.class);
+            LOG.info("Machine Monitor {}", machine.getHost());
         }
         catch (IOException e) {
             LOG.error(e.getMessage());
         }
-
-        LOG.info("Machine Monitor {}", json);
     }
 
     @RequestMapping(path = "/login", method = RequestMethod.POST )
