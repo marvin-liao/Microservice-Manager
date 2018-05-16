@@ -10,6 +10,7 @@ import org.ustb.MicroServiceMgr.domain.Api;
 import org.ustb.MicroServiceMgr.lib.HttpUtil;
 
 import java.io.IOException;
+import java.util.Iterator;
 
 @Component
 public class MicroServiceMonitor {
@@ -23,8 +24,13 @@ public class MicroServiceMonitor {
             if (json != null) {
                 ObjectMapper m = new ObjectMapper();
                 JsonNode rootNode = m.readTree(json);
+                JsonNode serviceList = rootNode.get("applications").get("application");
 
-                LOG.info("Service Monitor {}", json);
+                Iterator<JsonNode> services = serviceList.iterator();
+                while (services.hasNext()) {
+                    JsonNode current = services.next();
+                    LOG.info("Service Monitor {}", current.get("name").asText());
+                }
             }
         }
         catch (IOException e) {

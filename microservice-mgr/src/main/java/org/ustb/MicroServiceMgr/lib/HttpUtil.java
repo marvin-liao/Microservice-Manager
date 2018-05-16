@@ -34,28 +34,24 @@ public class HttpUtil {
     
     private static final Logger LOG = LoggerFactory.getLogger(HttpUtil.class);
 
-    public static String doGet(String url) {  
-        try {  
-            HttpClient client = HttpClients.createDefault();
-            //发送get请求  
-            HttpGet request = new HttpGet(url);
-            request.setHeader("Accept", "application/json");
-            request.setHeader("Content-Type", "application/json");
-            HttpResponse response = client.execute(request);  
-   
-            /**请求发送成功，并得到响应**/  
-            if (response.getStatusLine().getStatusCode() == HttpStatus.SC_OK) {  
-                /**读取服务器返回过来的json字符串数据**/  
-                String strResult = EntityUtils.toString(response.getEntity());  
-                  
-                return strResult;  
-            }  
-        }   
-        catch (IOException e) {  
-            e.printStackTrace();  
-        }  
-          
-        return null;  
+    public static String doGet(String url) throws IOException {
+        HttpClient client = HttpClients.createDefault();
+        //发送get请求
+        HttpGet request = new HttpGet(url);
+        request.setHeader("Accept", "application/json");
+        request.setHeader("Content-Type", "application/json");
+        HttpResponse response = client.execute(request);
+
+        /**请求发送成功，并得到响应**/
+        if (response.getStatusLine().getStatusCode() == HttpStatus.SC_OK) {
+            /**读取服务器返回过来的json字符串数据**/
+            String strResult = EntityUtils.toString(response.getEntity());
+
+            return strResult;
+        }
+        else{
+            return null;
+        }
     }  
 
     public static String doPost(String url, Map params){  

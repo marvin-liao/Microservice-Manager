@@ -82,6 +82,14 @@ public class MicroServiceMgrController {
 
     @RequestMapping(path = "/machine/publish", method = RequestMethod.POST)
     public void machinePublish(@RequestBody String json){
+        try {
+            ObjectMapper m = new ObjectMapper();
+            JsonNode rootNode = m.readTree(json);
+        }
+        catch (IOException e) {
+            LOG.error(e.getMessage());
+        }
+
         LOG.info("Machine Monitor {}", json);
     }
 
