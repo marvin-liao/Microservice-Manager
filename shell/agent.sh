@@ -11,5 +11,5 @@ do
     C_JSON="{\"host\":\"$C_HOST\", \"name\":\"$C_NAME\", \"ip\":\"$C_IP\", \"image\":\"$C_IMAGE\", \"time\":\"$C_TIME\"}"
     echo $C_JSON
     curl -X POST --header 'Content-Type: application/json' -d "$C_JSON" 'http://MICRO-MGR:8080/machine/publish'
-    sleep 5s
+    sleep 3s
 done

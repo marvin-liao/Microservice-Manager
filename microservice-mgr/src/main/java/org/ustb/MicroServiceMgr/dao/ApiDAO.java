@@ -8,6 +8,7 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 import org.ustb.MicroServiceMgr.controller.MicroServiceMgrController;
 import org.ustb.MicroServiceMgr.domain.Api;
+import org.ustb.MicroServiceMgr.domain.ApiItem;
 
 import java.util.List;
 
@@ -20,29 +21,60 @@ public class ApiDAO {
     private JdbcTemplate jdbcTemplate;
 
     public int save(Api doc){
-        List<Api> list = jdbcTemplate.query("SELECT * FROM appdoc WHERE title = ?",
+        List<Api> list = jdbcTemplate.query("SELECT * FROM api WHERE title = ?",
                 new Object[]{doc.getTitle()}, new BeanPropertyRowMapper(Api.class));
 
         if (list != null && list.size() > 0) {
-            String sql = "UPDATE appdoc SET description=?, doc=? WHERE title=?";
-            LOG.info("RUN sql[{}]", sql);
-            return jdbcTemplate.update(sql, doc.getDescription(), doc.getDoc(), doc.getTitle());
+            return jdbcTemplate.update("UPDATE api SET description=?,doc=?,host=?,basepath=?,lastmodify=?,result=? WHERE title=?",
+                    doc.getDescription(),
+                    doc.getDoc(),
+                    doc.getHost(),
+                    doc.getBasePath(),
+                    doc.getLastModify(),
+                    doc.getResult(),
+                    doc.getTitle());
         } else {
-            String sql = "INSERT INTO appdoc(title, description, doc) values(?, ?, ?)";
-            LOG.info("RUN sql[{}]", sql);
-            return jdbcTemplate.update(sql, doc.getTitle(), doc.getDescription(), doc.getDoc());
+            return jdbcTemplate.update("INSERT INTO api(title,description,doc,host,basepath,lastmodify,result) values(?,?,?,?,?,?,?)",
+                    doc.getTitle(),
+                    doc.getDescription(),
+                    doc.getDoc(),
+                    doc.getHost(),
+                    doc.getBasePath(),
+                    doc.getLastModify(),
+                    doc.getResult());
         }
     }
 
+
+    public int clearItems(String title){
+        return jdbcTemplate.update("DELETE FROM api_item WHERE title = ?", title);
+    }
+
+    public int saveItem(ApiItem item){
+        return jdbcTemplate.update("INSERT INTO " +
+                        "api_item(title, path, method, summary, operationId, lastmodify, result) " +
+                        "values(?, ?, ?, ?, ?, ?, ?)",
+                item.getTitle(),
+                item.getPath(),
+                item.getMethod(),
+                item.getSummary(),
+                item.getOperationId(),
+                item.getLastModify(),
+                item.getResult());
+    }
+
+    public List<ApiItem> findItemsByTitle(String title){
+        String sql = "SELECT * FROM api_item WHERE title = ?";
+        return jdbcTemplate.query(sql, new Object[]{title}, new BeanPropertyRowMapper(ApiItem.class));
+    }
+
     public List<Api> findAll(){
-        String sql = "SELECT * FROM appdoc";
-        LOG.info("RUN sql[{}]", sql);
+        String sql = "SELECT * FROM api";
         return jdbcTemplate.query(sql, new Object[]{}, new BeanPropertyRowMapper(Api.class));
     }
 
     public Api findByTitle(String title){
-        String sql = "SELECT * FROM appdoc WHERE title = ?";
-        LOG.info("RUN sql[{}]", sql);
+        String sql = "SELECT * FROM api WHERE title = ?";
         List<Api> list = jdbcTemplate.query(sql, new Object[]{title}, new BeanPropertyRowMapper(Api.class));
 
         if(list != null && list.size() > 0){

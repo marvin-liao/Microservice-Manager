@@ -74,7 +74,7 @@ services:
     container_name: GATEWAY
     image: java:8-jre
     environment:
-      - CONTAINER_NAME=CUSTOMER
+      - CONTAINER_NAME=GATEWAY
       - CONTAINER_IMAGE=java:8-jre
       - APPLICATION_JAR=/app/gateway-service.jar
     volumes:
@@ -83,3 +83,9 @@ services:
     command: /shell/entrypoint.sh
     ports:
       - 80:8765
+
+  adminer:
+    image: adminer
+    restart: always
+    ports:
+      - 9090:8080

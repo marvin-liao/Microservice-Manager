@@ -19,15 +19,59 @@ SET NAMES utf8;
 CREATE DATABASE `swagger` CHARACTER SET utf8 COLLATE utf8_general_ci;
 USE swagger;
 
--- ----------------------------
--- Table structure for appdoc
--- ----------------------------
-DROP TABLE IF EXISTS `appdoc`;
-CREATE TABLE `appdoc` (
+DROP TABLE IF EXISTS `api`;
+CREATE TABLE `api` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `title` varchar(255) DEFAULT NULL,
   `description` varchar(255) DEFAULT NULL,
+  `host` varchar(255) DEFAULT NULL,
+  `basepath` varchar(255) DEFAULT NULL,
   `doc` text,
+  `lastmodify` datetime DEFAULT NULL,
+  `result` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `title` (`title`)
-) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+DROP TABLE IF EXISTS `api_item`;
+CREATE TABLE `api_item` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `title` varchar(255) DEFAULT NULL,
+  `path` varchar(255) DEFAULT NULL,
+  `method` varchar(255) DEFAULT NULL,
+  `summary` varchar(255) DEFAULT NULL,
+  `operationid` varchar(255) DEFAULT NULL,
+  `consumes` varchar(255) DEFAULT NULL,
+  `lastmodify` datetime DEFAULT NULL,
+  `result` int(11) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+DROP TABLE IF EXISTS `machine`;
+CREATE TABLE `machine` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `host` varchar(255) DEFAULT NULL,
+  `name` varchar(255) DEFAULT NULL,
+  `ip` varchar(255) DEFAULT NULL,
+  `time` varchar(255) DEFAULT NULL,
+  `image` varchar(255) DEFAULT NULL,
+  `lastmodify` datetime DEFAULT NULL,
+  `result` int(11) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+DROP TABLE IF EXISTS `service`;
+CREATE TABLE `service` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `instanceid` varchar(255) DEFAULT NULL,
+  `hostname` varchar(255) DEFAULT NULL,
+  `app` varchar(255) DEFAULT NULL,
+  `ipAddr` varchar(255) DEFAULT NULL,
+  `homepageurl` varchar(255) DEFAULT NULL,
+  `statuspageurl` varchar(255) DEFAULT NULL,
+  `healthcheckurl` varchar(255) DEFAULT NULL,
+  `lastupdatedtimestamp` bigint DEFAULT NULL,
+  `lastmodify` datetime DEFAULT NULL,
+  `result` int(11) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;

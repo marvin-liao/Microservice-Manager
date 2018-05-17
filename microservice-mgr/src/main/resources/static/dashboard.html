@@ -40,175 +40,70 @@
 <div class="container">
 
     <div class="row">
-        <div class="deploy_block">
+        <div id="machine-list" class="deploy_block">
             <img class="deploy_icon" src="image/docker.png" >
             <h3>容器管理</h3>
-            <div class="am-panel">
+
+            <div v-for="row in rows" class="am-panel">
                 <div class="am-panel-hd">
-                    <span class="am-icon-right">正常</span>
-                    DISCOVERY
+                    <span v-if="row.result === 1" class="am-icon-right">正常</span>
+                    <span v-else class="am-icon-wrong">异常</span>
+                    {{ row.name }}
+                    <a v-if="row.result === 2" v-bind:href="'machine/delele/' + row.host" class="am-fr">删除</a>
                 </div>
                 <ul>
-                    <li>镜像：java:8-jre</li>
-                    <li>IP地址：172.20.0.4</li>
-                    <li>主机名：721aaed80ff0</li>
-                    <li>最后更新：2018-05-16 15:41:43</li>
+                    <li>镜像：{{ row.image }}</li>
+                    <li>IP地址：{{ row.ip }}</li>
+                    <li>主机名：{{ row.host }}</li>
+                    <li>最后更新：{{ row.time }}</li>
                 </ul>
             </div>
 
-            <div class="am-panel">
-                <div class="am-panel-hd">
-                    <span class="am-icon-wrong">异常</span>
-                    ACCOUNT
-                    <a href="" class="am-fr">清除</a>
-                </div>
-                <ul>
-                    <li>镜像：java:8-jre</li>
-                    <li>IP地址：172.20.0.4</li>
-                    <li>主机名：721aaed80ff0</li>
-                    <li>最后更新：2018-05-16 15:41:43</li>
-                </ul>
-            </div>
-
-            <div class="am-panel">
-                <div class="am-panel-hd">
-                    <span class="am-icon-right">正常</span>
-                    DISCOVERY
-                </div>
-                <ul>
-                    <li>镜像：java:8-jre</li>
-                    <li>IP地址：172.20.0.4</li>
-                    <li>主机名：721aaed80ff0</li>
-                    <li>最后更新：2018-05-16 15:41:43</li>
-                </ul>
-            </div>
-
-            <div class="am-panel">
-                <div class="am-panel-hd">
-                    <span class="am-icon-right">正常</span>
-                    DISCOVERY
-                </div>
-                <ul>
-                    <li>镜像：java:8-jre</li>
-                    <li>IP地址：172.20.0.4</li>
-                    <li>主机名：721aaed80ff0</li>
-                    <li>最后更新：2018-05-16 15:41:43</li>
-                </ul>
-            </div>
         </div>
     </div>
 
     <div class="row">
-        <div class="deploy_block">
+        <div id="service-list" class="deploy_block">
             <img class="deploy_icon" src="image/spring.png" >
             <h3>服务管理</h3>
-            <div class="am-panel">
+
+            <div v-for="row in rows" class="am-panel">
                 <div class="am-panel-hd">
-                    <span class="am-icon-right">正常</span>
-                    customer-service
-                    <a href="" class="am-fr">访问</a>
+                    <span v-if="row.result === 1" class="am-icon-right">正常</span>
+                    <span v-else class="am-icon-wrong">异常</span>
+                    {{ row.app }}
                 </div>
                 <ul>
-                    <li>服务ID：e2a66c8f2fd4:account-service:2222</li>
-                    <li>IP地址：172.20.0.4</li>
-                    <li>端口：2222</li>
-                    <li>主机名：e2a66c8f2fd4</li>
-                    <li>最后更新：2018-05-16 15:41:43</li>
+                    <li>服务ID：{{ row.instanceId }}</li>
+                    <li>IP地址：{{ row.ipAddr }}</li>
+                    <li>主机名：{{ row.hostName }}</li>
+                    <li>最后更新：{{ row.lastModify }}</li>
                 </ul>
             </div>
-    
-            <div class="am-panel">
-                <div class="am-panel-hd">
-                    <span class="am-icon-wrong">异常</span>
-                    account-service
-                    <a href="" class="am-fr">访问</a>
-                </div>
-                <ul>
-                    <li>服务ID：e2a66c8f2fd4:account-service:2222</li>
-                    <li>IP地址：172.20.0.4</li>
-                    <li>端口：2222</li>
-                    <li>主机名：e2a66c8f2fd4</li>
-                    <li>最后更新：2018-05-16 15:41:43</li>
-                </ul>
-            </div>
+
         </div>
     </div>
 
     <div class="row">
-        <div class="deploy_block">
+        <div id="api-list" class="deploy_block">
             <img class="deploy_icon" src="image/swagger.png" >
             <h3>API管理</h3>
-            <div class="am-panel">
+
+            <div v-for="api in apis" class="am-panel">
                 <div class="am-panel-hd">
-                    customer-service
+                    {{ api.title }}
                 </div>
-                <ul class="am-api-list">
-                    <li>/accounts</li>
+                <ul v-for="row in api.items" class="am-api-list">
+                    <li>{{ row.path }}</li>
                     <li class="am-right">
-                        <span class="am-icon-right">正常</span>
-                        <span class="am-api">获取所有账户相关信息</span>
-                        <a class="am-view" href="">查看API</a>
-                    </li>
-                    <li>/accounts/customer/{customer}</li>
-                    <li class="am-wrong">
-                        <span class="am-icon-wrong">异常</span>
-                        <span class="am-api">根据账户的customerid查询</span>
-                        <a class="am-view" href="">查看API</a>
-                    </li>
-                    <li>/accounts/{number}</li>
-                    <li class="am-right">
-                        <span class="am-icon-right">正常</span>
-                        <span class="am-api">根据账户的number查询</span>
-                        <a class="am-view" href="">查看API</a>
+                        <span v-if="row.result === 1" class="am-icon-right">正常</span>
+                        <span v-else class="am-icon-wrong">异常</span>
+                        <span class="am-api">{{ row.summary }}</span>
+                        <a class="am-view" v-bind:href="'detail.html#' + row.title">查看API</a>
                     </li>
                 </ul>
             </div>
-    
-            <div class="am-panel">
-                <div class="am-panel-hd">    
-                    account-service
-                </div>
-                <ul class="am-api-list">
-                    <li>/accounts</li>
-                    <li class="am-right">
-                        <span class="am-icon-right">正常</span>
-                        <span class="am-api">获取所有账户相关信息</span>
-                        <a class="am-view" href="">查看API</a>
-                    </li>
-                    <li>/accounts/customer/{customer}</li>
-                    <li class="am-wrong">
-                        <span class="am-icon-wrong">异常</span>
-                        <span class="am-api">根据账户的customerid查询</span>
-                        <a class="am-view" href="">查看API</a>
-                    </li>
-                    <li>/accounts/{number}</li>
-                    <li class="am-right">
-                        <span class="am-icon-right">正常</span>
-                        <span class="am-api">根据账户的number查询</span>
-                        <a class="am-view" href="">查看API</a>
-                    </li>
-                </ul>
-            </div>
-        </div>
-    </div>
 
-    <div class="row">
-        <h5>
-            容器管理:
-        </h5>
-    </div>
-    <div class="row">
-        <div id="api-list">
-            <ul class="list-group">
-                <li v-for="api in apis" class="list-group-item">
-                    服务名称:
-                    <a v-bind:href="'detail.html#' + api.info.title" >
-                        {{ api.info.title }}
-                    </a>
-                    <span>( {{ api.info.description }} )</span>
-                </li>
-
-            </ul>
         </div>
     </div>
 
