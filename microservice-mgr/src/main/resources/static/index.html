@@ -5,9 +5,9 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="微服务文档中心">
+    <meta name="description" content="微服务管理系统 v1.0">
 
-    <title>微服务文档中心</title>
+    <title>微服务管理系统 v1.0</title>
 
     <!-- Bootstrap Core CSS -->
     <link href="css/bootstrap.min.css" rel="stylesheet">
@@ -23,14 +23,12 @@
     <div class="container">
         <!-- Brand and toggle get grouped for better mobile display -->
         <div class="navbar-header">
-            <a class="navbar-brand" href="#">微服务列表</a>
+            <a class="navbar-brand" href="#">微服务管理系统 v1.0</a>
         </div>
         <!-- Collect the nav links, forms, and other content for toggling -->
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
             <ul class="nav navbar-nav navbar-right">
-                <li>
-                    <a href=""></a>
-                </li>
+                <li><a href="">by 廖凡丁</a></li>
             </ul>
         </div>
         <!-- /.navbar-collapse -->
@@ -42,24 +40,14 @@
 <div class="container">
 
     <div class="row">
-        <h5>
-            您有权限的微服务如下:
-        </h5>
+        <h3 style="display:inline-block;">系统架构图</h3>
+        <a style="float:right; line-height:50px; font-size:20px; padding-top:6px;" href="dashboard.html">&gt;&gt;&nbsp;&nbsp;进入管理系统</a>
     </div>
-    <div class="row">
-        <div id="api-list">
-            <ul class="list-group">
-                <li v-for="api in apis" class="list-group-item">
-                    服务名称:
-                    <a v-bind:href="'detail.html#' + api.info.title" >
-                         {{ api.info.title }}
-                    </a>
-                    <span>( {{ api.info.description }} )</span>
-                </li>
 
-            </ul>
-        </div>
+    <div class="row">
+        <img style="margin:20px auto; width:100%;" src="image/struct.png" />
     </div>
+
 
     <hr>
 
@@ -67,7 +55,7 @@
     <footer class="footer navbar-fixed-bottom">
         <div class="row">
             <div class="col-lg-12">
-                <p>&nbsp;&nbsp;Powered By Swagger2</p>
+                <p></p>
             </div>
             <!-- /.col-lg-12 -->
         </div>

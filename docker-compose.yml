@@ -3,9 +3,14 @@ services:
   microservice-mgr:
     container_name: MICRO-MGR
     image: java:8-jre
+    environment:
+      - CONTAINER_NAME=MICRO-MGR
+      - CONTAINER_IMAGE=java:8-jre
+      - APPLICATION_JAR=/app/microservice-mgr.jar
     volumes:
       - ./microservice-mgr/target:/app
-    command: java -Djava.security.egd=file:/dev/./urandom -Dspring.profiles.active=container -jar /app/microservice-mgr.jar
+      - ./shell:/shell
+    command: /shell/entrypoint.sh
     ports:
       - 8080:8080
 
@@ -14,8 +19,12 @@ services:
     image: mysql
     environment:
       - MYSQL_ROOT_PASSWORD=123456
+      - CONTAINER_NAME=MGR-DB
+      - CONTAINER_IMAGE=mysql:latest
     volumes:
       - ./mgr-db:/docker-entrypoint-initdb.d
+      - ./shell:/shell
+    entrypoint: /shell/mysql-entry.sh
     ports:
       - 3307:3306
 
@@ -24,6 +33,7 @@ services:
     image: java:8-jre
     environment:
       - CONTAINER_NAME=DISCOVERY
+      - CONTAINER_IMAGE=java:8-jre
       - APPLICATION_JAR=/app/discovery-service.jar
     volumes:
       - ./discovery-service/target:/app
@@ -37,6 +47,7 @@ services:
     image: java:8-jre
     environment:
       - CONTAINER_NAME=ACCOUNT
+      - CONTAINER_IMAGE=java:8-jre
       - APPLICATION_JAR=/app/account-service.jar
     volumes:
       - ./account-service/target:/app
@@ -50,6 +61,7 @@ services:
     image: java:8-jre
     environment:
       - CONTAINER_NAME=CUSTOMER
+      - CONTAINER_IMAGE=java:8-jre
       - APPLICATION_JAR=/app/customer-service.jar
     volumes:
       - ./customer-service/target:/app
@@ -58,12 +70,16 @@ services:
     ports:
       - 3333:3333
 
-  # gateway-service:
-  #   container_name: GATEWAY
-  #   image: java:8-jre
-  #   volumes:
-  #     - ./gateway-service/target:/app
-  #     - ./machine-agent:/agent
-  #   command: java -Djava.security.egd=file:/dev/./urandom -Dspring.profiles.active=container -jar /app/gateway-service.jar
-  #   ports:
-  #     - 80:8765
+  gateway-service:
+    container_name: GATEWAY
+    image: java:8-jre
+    environment:
+      - CONTAINER_NAME=CUSTOMER
+      - CONTAINER_IMAGE=java:8-jre
+      - APPLICATION_JAR=/app/gateway-service.jar
+    volumes:
+      - ./gateway-service/target:/app
+      - ./shell:/shell
+    command: /shell/entrypoint.sh
+    ports:
+      - 80:8765

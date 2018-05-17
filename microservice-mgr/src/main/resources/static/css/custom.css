@@ -8,10 +8,121 @@ body {
     padding-top: 70px; /* Required padding for .navbar-fixed-top. Remove if using .navbar-static-top. Change if height of navigation changes. */
 }
 
+footer {
+    margin: 50px 0;
+}
+
+.navbar-inverse .navbar-brand {
+    color: #ffffff;
+}
+
 .img-center {
 	margin: 0 auto;
 }
 
-footer {
-    margin: 50px 0;
+.row{
+    border-bottom: 1px solid #ddd;
+}
+
+
+.deploy_block { 
+    position:relative; 
+    padding-left:60px; 
+    margin-bottom:30px; 
+}
+
+.deploy_icon {
+    position:absolute; 
+    top:14px; 
+    left:0px; 
+    margin-top:-21px;
+    height:35px; 
+    width:35px; 
+}
+
+.deploy_block h3 { 
+    font-family: "Lucida Grande","Hiragino Sans GB","Hiragino Sans GB W3", sans-serif;    
+    font-size: 16px;
+    margin-bottom:30px;
+    margin-top: 30px;
+}
+
+.am-panel {
+    position: relative;
+    display:inline-flex;
+    flex-direction:column;
+    font-family: "Lucida Grande","Hiragino Sans GB","Hiragino Sans GB W3", sans-serif;
+    font-size: 14px;
+    width: 270px;
+    margin: 0px 20px 20px 0px;
+    border:1px solid #ddd;
+    color:#363b40;
+    border-radius:3px;
+}
+
+.am-panel-hd {
+    padding: .6rem 1.25rem;
+    color: #444;
+    background-color: #f5f5f5;
+    border-bottom: 1px solid transparent;
+    border-color: #ddd;
+}
+
+.am-icon-right {
+    display: inline-block;
+    color: #fff;
+    background-color: #10a54a;
+    font-size: 10px;
+    padding: 2px 4px;
+}
+
+.am-icon-wrong {
+    display: inline-block;
+    color: #fff;
+    background-color: #f37b1d;
+    font-size: 10px;
+    padding: 2px 4px;
+}
+
+.am-panel ul {
+    padding-left: 2em;
+    margin-top: 1.6rem;
+    font-size: 10px;
+}
+
+ul.am-api-list {
+    margin-top: 15px;
+    font-size: 10px;
+    list-style: none;
+    padding: 0px 15px;
+}
+
+ul.am-api-list li{
+    margin-bottom: 3px;
+}
+
+.am-api{
+    width: 200px;
+    overflow: hidden; 
+}
+
+.am-right{
+    border: 1px solid #10a54a;
+}
+
+.am-wrong{
+    border: 1px solid #f37b1d;
+}
+
+.am-view{
+    position: absolute;
+    right: 20px;
+    padding-left: 3px;
+    line-height: 21px;
+    z-index: 1;
+    background-color: #fff;
+}
+
+.am-fr{
+    float: right;
 }

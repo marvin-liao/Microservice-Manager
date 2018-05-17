@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:v-bind="http://www.w3.org/1999/xhtml">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="微服务管理系统 v1.0">
+
+    <title>微服务管理系统 v1.0</title>
+
+    <!-- Bootstrap Core CSS -->
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom CSS -->
+    <link href="css/custom.css" rel="stylesheet">
+</head>
+
+<body>
+
+<!-- Navigation -->
+<nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+    <div class="container">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header">
+            <a class="navbar-brand" href="#">微服务管理系统 v1.0</a>
+        </div>
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+            <ul class="nav navbar-nav navbar-right">
+                <li><a href="">by 廖凡丁</a></li>
+            </ul>
+        </div>
+        <!-- /.navbar-collapse -->
+    </div>
+    <!-- /.container -->
+</nav>
+
+<!-- Page Content -->
+<div class="container">
+
+    <div class="row">
+        <div class="deploy_block">
+            <img class="deploy_icon" src="image/docker.png" >
+            <h3>容器管理</h3>
+            <div class="am-panel">
+                <div class="am-panel-hd">
+                    <span class="am-icon-right">正常</span>
+                    DISCOVERY
+                </div>
+                <ul>
+                    <li>镜像：java:8-jre</li>
+                    <li>IP地址：172.20.0.4</li>
+                    <li>主机名：721aaed80ff0</li>
+                    <li>最后更新：2018-05-16 15:41:43</li>
+                </ul>
+            </div>
+
+            <div class="am-panel">
+                <div class="am-panel-hd">
+                    <span class="am-icon-wrong">异常</span>
+                    ACCOUNT
+                    <a href="" class="am-fr">清除</a>
+                </div>
+                <ul>
+                    <li>镜像：java:8-jre</li>
+                    <li>IP地址：172.20.0.4</li>
+                    <li>主机名：721aaed80ff0</li>
+                    <li>最后更新：2018-05-16 15:41:43</li>
+                </ul>
+            </div>
+
+            <div class="am-panel">
+                <div class="am-panel-hd">
+                    <span class="am-icon-right">正常</span>
+                    DISCOVERY
+                </div>
+                <ul>
+                    <li>镜像：java:8-jre</li>
+                    <li>IP地址：172.20.0.4</li>
+                    <li>主机名：721aaed80ff0</li>
+                    <li>最后更新：2018-05-16 15:41:43</li>
+                </ul>
+            </div>
+
+            <div class="am-panel">
+                <div class="am-panel-hd">
+                    <span class="am-icon-right">正常</span>
+                    DISCOVERY
+                </div>
+                <ul>
+                    <li>镜像：java:8-jre</li>
+                    <li>IP地址：172.20.0.4</li>
+                    <li>主机名：721aaed80ff0</li>
+                    <li>最后更新：2018-05-16 15:41:43</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="deploy_block">
+            <img class="deploy_icon" src="image/spring.png" >
+            <h3>服务管理</h3>
+            <div class="am-panel">
+                <div class="am-panel-hd">
+                    <span class="am-icon-right">正常</span>
+                    customer-service
+                    <a href="" class="am-fr">访问</a>
+                </div>
+                <ul>
+                    <li>服务ID：e2a66c8f2fd4:account-service:2222</li>
+                    <li>IP地址：172.20.0.4</li>
+                    <li>端口：2222</li>
+                    <li>主机名：e2a66c8f2fd4</li>
+                    <li>最后更新：2018-05-16 15:41:43</li>
+                </ul>
+            </div>
+    
+            <div class="am-panel">
+                <div class="am-panel-hd">
+                    <span class="am-icon-wrong">异常</span>
+                    account-service
+                    <a href="" class="am-fr">访问</a>
+                </div>
+                <ul>
+                    <li>服务ID：e2a66c8f2fd4:account-service:2222</li>
+                    <li>IP地址：172.20.0.4</li>
+                    <li>端口：2222</li>
+                    <li>主机名：e2a66c8f2fd4</li>
+                    <li>最后更新：2018-05-16 15:41:43</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="deploy_block">
+            <img class="deploy_icon" src="image/swagger.png" >
+            <h3>API管理</h3>
+            <div class="am-panel">
+                <div class="am-panel-hd">
+                    customer-service
+                </div>
+                <ul class="am-api-list">
+                    <li>/accounts</li>
+                    <li class="am-right">
+                        <span class="am-icon-right">正常</span>
+                        <span class="am-api">获取所有账户相关信息</span>
+                        <a class="am-view" href="">查看API</a>
+                    </li>
+                    <li>/accounts/customer/{customer}</li>
+                    <li class="am-wrong">
+                        <span class="am-icon-wrong">异常</span>
+                        <span class="am-api">根据账户的customerid查询</span>
+                        <a class="am-view" href="">查看API</a>
+                    </li>
+                    <li>/accounts/{number}</li>
+                    <li class="am-right">
+                        <span class="am-icon-right">正常</span>
+                        <span class="am-api">根据账户的number查询</span>
+                        <a class="am-view" href="">查看API</a>
+                    </li>
+                </ul>
+            </div>
+    
+            <div class="am-panel">
+                <div class="am-panel-hd">    
+                    account-service
+                </div>
+                <ul class="am-api-list">
+                    <li>/accounts</li>
+                    <li class="am-right">
+                        <span class="am-icon-right">正常</span>
+                        <span class="am-api">获取所有账户相关信息</span>
+                        <a class="am-view" href="">查看API</a>
+                    </li>
+                    <li>/accounts/customer/{customer}</li>
+                    <li class="am-wrong">
+                        <span class="am-icon-wrong">异常</span>
+                        <span class="am-api">根据账户的customerid查询</span>
+                        <a class="am-view" href="">查看API</a>
+                    </li>
+                    <li>/accounts/{number}</li>
+                    <li class="am-right">
+                        <span class="am-icon-right">正常</span>
+                        <span class="am-api">根据账户的number查询</span>
+                        <a class="am-view" href="">查看API</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <h5>
+            容器管理:
+        </h5>
+    </div>
+    <div class="row">
+        <div id="api-list">
+            <ul class="list-group">
+                <li v-for="api in apis" class="list-group-item">
+                    服务名称:
+                    <a v-bind:href="'detail.html#' + api.info.title" >
+                        {{ api.info.title }}
+                    </a>
+                    <span>( {{ api.info.description }} )</span>
+                </li>
+
+            </ul>
+        </div>
+    </div>
+
+    <hr>
+
+    <!-- Footer -->
+    <footer class="footer navbar-fixed-bottom">
+        <div class="row">
+            <div class="col-lg-12">
+                <p></p>
+            </div>
+            <!-- /.col-lg-12 -->
+        </div>
+        <!-- /.row -->
+    </footer>
+
+</div>
+<!-- /.container -->
+
+<!-- jQuery -->
+<script src="js/jquery.js"></script>
+
+<!-- Bootstrap Core JavaScript -->
+<!--<script src="js/bootstrap.min.js"></script>-->
+
+<!-- Vue2 -->
+<script src="js/vue.js"></script>
+
+<script src="js/index.js"></script>
+
+</body>
+
+</html>
