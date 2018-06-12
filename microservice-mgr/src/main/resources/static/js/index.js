@@ -19,6 +19,38 @@ var apiList = new Vue({
                 alert("访问数据错误");
             }
         });
+    },
+    methods: {
+        filterApi: function (event) {
+            query = $("#api-query").val();
+            result = []
+            if(query.length > 0){
+                for(index in this.apis){
+                    api = this.apis[index];
+                    if(api.title.indexOf(query) != -1){
+                        result.push(api);
+                    }
+                }
+            }
+            if(result.length >0){
+                this.apis = result;
+            }
+        },
+        filterApiItem: function (api) {
+            path = $("#api-item-query").val();
+            result = []
+            if(path.length > 0){
+                for(i in api.items){
+                    it = api.items[i];
+                    if(it.path.indexOf(path) != -1){
+                        result.push(it);
+                    }
+                }
+            }
+            if(result.length >0){
+                api.items = result;
+            }
+        }
     }
 });
 

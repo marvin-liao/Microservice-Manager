@@ -20,6 +20,13 @@ public class ApiDAO {
     @Autowired
     private JdbcTemplate jdbcTemplate;
 
+    public int updateResult(String title, int result){
+        return jdbcTemplate.update("UPDATE api_item" +
+                        " SET result=?" +
+                        " WHERE title=?",
+                result, title);
+    }
+
     public int save(Api doc){
         List<Api> list = jdbcTemplate.query("SELECT * FROM api WHERE title = ?",
                 new Object[]{doc.getTitle()}, new BeanPropertyRowMapper(Api.class));

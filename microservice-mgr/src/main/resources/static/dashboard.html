@@ -89,17 +89,31 @@
             <img class="deploy_icon" src="image/swagger.png" >
             <h3>API管理</h3>
 
+            <span class="am-search">
+                服务搜索：<input id="api-query" type="text">
+                <input type="submit" v-on:click="filterApi" value="搜索">
+            </span>
+
             <div v-for="api in apis" class="am-panel">
                 <div class="am-panel-hd">
                     {{ api.title }}
+
+                    <span class="am-api-search">
+                        <input id="api-item-query" type="text" class="am-text">
+                        <input type="submit" class="am-button" v-on:click="filterApiItem(api)" value="搜索">
+                    </span>
                 </div>
                 <ul v-for="row in api.items" class="am-api-list">
                     <li>{{ row.path }}</li>
-                    <li class="am-right">
-                        <span v-if="row.result === 1" class="am-icon-right">正常</span>
-                        <span v-else class="am-icon-wrong">异常</span>
+                    <li v-if="row.result === 1" class="am-right">
+                        <span class="am-icon-right">正常</span>
                         <span class="am-api">{{ row.summary }}</span>
-                        <a class="am-view" v-bind:href="'detail.html#' + row.title">查看API</a>
+                        <a class="am-view" target="_blank" v-bind:href="'detail.html#' + row.title">查看API</a>
+                    </li>
+                    <li v-else class="am-wrong">
+                        <span class="am-icon-wrong">异常</span>
+                        <span class="am-api">{{ row.summary }}</span>
+                        <a class="am-view" target="_blank" v-bind:href="'detail.html#' + row.title">查看API</a>
                     </li>
                 </ul>
             </div>

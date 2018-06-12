@@ -138,12 +138,12 @@ public class MicroServiceMgrController {
     public String serviceList(){
         List<Service> services = serviceDao.findAll();
 
-        Date now = new Date();
+        /*Date now = new Date();
         for(Service se : services){
             if (now.getTime()-se.getLastModify().getTime()>3*1000){
                 se.setResult(2);
             }
-        }
+        }*/
 
         String json = "[]";
         try {
@@ -167,6 +167,15 @@ public class MicroServiceMgrController {
         for(Machine m : machines){
             if (now.getTime()-m.getLastModify().getTime()>6*1000){
                 m.setResult(2);
+
+                String serviceName = m.getName() + "-SERVICE";
+                serviceDao.updateResult(serviceName, 2);
+
+                LOG.info("disable service |{}|", serviceName);
+
+                String apiName = m.getName().toLowerCase() + "-services";
+                apiDao.updateResult(apiName, 2);
+                LOG.info("disable api |{}|", apiName);
             }
         }
 
@@ -192,6 +201,12 @@ public class MicroServiceMgrController {
             Machine machine = m.readValue(json, Machine.class);
             machine.setLastModify(new Date());
             machine.setResult(1);
+
+            String serviceName = machine.getName() + "-SERVICE";
+            serviceDao.updateResult(serviceName, 1);
+
+            String apiName = machine.getName().toLowerCase() + "-services";
+            apiDao.updateResult(apiName, 1);
 
             if(machine.getHost() != null && machine.getHost() != ""){
                 machineDao.save(machine);

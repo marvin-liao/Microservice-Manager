@@ -19,6 +19,13 @@ public class ServiceDAO {
     @Autowired
     private JdbcTemplate jdbcTemplate;
 
+    public int updateResult(String app, int result){
+        return jdbcTemplate.update("UPDATE service" +
+                        " SET result=?" +
+                        " WHERE app=?",
+                result, app);
+    }
+
     public int save(Service service){
         List<Service> list = jdbcTemplate.query("SELECT * FROM service WHERE instanceid = ?",
                 new Object[]{service.getInstanceId()}, new BeanPropertyRowMapper(Service.class));
@@ -33,7 +40,6 @@ public class ServiceDAO {
                             "healthcheckurl=?," +
                             "lastupdatedtimestamp=?," +
                             "lastmodify=?," +
-                            "result=? " +
                             "WHERE instanceid=?",
                     service.getHostName(),
                     service.getApp(),
@@ -43,7 +49,6 @@ public class ServiceDAO {
                     service.getHealthCheckUrl(),
                     service.getLastUpdatedTimestamp(),
                     service.getLastModify(),
-                    service.getResult(),
                     service.getInstanceId());
         } else {
             return jdbcTemplate.update("INSERT INTO " +
@@ -55,8 +60,7 @@ public class ServiceDAO {
                             "statuspageurl," +
                             "healthcheckurl," +
                             "lastupdatedtimestamp," +
-                            "lastmodify," +
-                            "result) " +
+                            "lastmodify) " +
                             "values(?, ?, ?, ?, ?, ?, ?, ?, ?, ?)",
                     service.getInstanceId(),
                     service.getHostName(),
@@ -66,8 +70,7 @@ public class ServiceDAO {
                     service.getStatusPageUrl(),
                     service.getHealthCheckUrl(),
                     service.getLastUpdatedTimestamp(),
-                    service.getLastModify(),
-                    service.getResult());
+                    service.getLastModify());
         }
     }
 

@@ -62,7 +62,7 @@ public class MicroServiceMonitor {
         if (serObjList.size() > 0){
             for (Service se : serObjList){
                 se.setLastModify(new Date());
-                se.setResult(1);
+                //se.setResult(1);
                 serviceDao.save(se);
 
                 LOG.info("Service Info Saved {}", se.getInstanceId());
